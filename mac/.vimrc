@@ -17,6 +17,9 @@ Plug 'maralla/completor.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/vim-signify', {'tag': 'legacy'}
 Plug 'preservim/tagbar'
+Plug 'preservim/nerdcommenter'
+Plug 'alpertuna/vim-header'
+Plug 'zhuzhzh/verilog_emacsauto.vim', {'for': ['verilog', 'systemverilog'] }
 call plug#end()
 
 set belloff=all
@@ -105,7 +108,7 @@ nnoremap <C-f> :NERDTreeFind<CR>
 let g:NERDTreeDirArrowExpandable = "\uf105"
 let g:NERDTreeDirArrowCollapsible = "\uf107"
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+" autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 " Close the tab if NERDTree is the only window remaining in it.
@@ -130,7 +133,10 @@ if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
 
+let g:VerilogModeFile = "/opt/homebrew/share/emacs/site-lisp/verilog-mode.el"
+
+let g:header_auto_update_header = 1
+let g:header_field_author = 'yi'
 nmap <F8> :TagbarToggle<CR>
 set guifont=MesloLGM\ Nerd\ Font\ Mono\ Regular\ 10
 set t_RV=
-autocmd vimenter * hi Comment term=bold cterm=NONE ctermfg=Darkgrey ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
